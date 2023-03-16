@@ -1,5 +1,5 @@
-const BlockTransaction = require('./../models/blocktransaction');
-const AdminTransaction = require('./../models/admintransaction');
+const BlockTransaction = require('../models/blocktransaction');
+const AdminTransaction = require('../models/admintransaction');
 
 module.exports.getTransactions = async (req, res) => {
 
