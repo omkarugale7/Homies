@@ -8,6 +8,7 @@ const cors = require('cors');
 const userRoutes = require('./routes/users');
 const transactionRoutes = require('./routes/transactions');
 const blocktransactionRoutes = require('./routes/blocktransactions');
+const admintransactionRoutes = require('./routes/admintransactions');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -19,6 +20,7 @@ app.use(cors());
 app.use('/user', userRoutes);
 app.use('/transaction', transactionRoutes);
 app.use('/block', blocktransactionRoutes);
+app.use('/admin', admintransactionRoutes);
 
 app.get('/', (req, res) => {
     res.send("Welcome to Dhanrakshak - The Protector of Your Wallet !!!");
