@@ -9,13 +9,11 @@ const BlockTransactionSchema = new Mongoose.Schema({
     },
     sender_id: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     receiver_id: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     amount: {
         type: Number,
