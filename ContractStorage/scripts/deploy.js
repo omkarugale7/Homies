@@ -1,6 +1,6 @@
 const hre = require("hardhat");
 
-async function main({transaction_id, sender_id, receipent_id, amount, timestamp}) {
+async function main({transaction_id, sender_id, receiver_id, amount, timestamp}) {
   const StorageFactory = await ethers.getContractFactory("Storage")
   console.log("Deploying contract...")
   const Storage = await StorageFactory.deploy()
@@ -12,7 +12,7 @@ async function main({transaction_id, sender_id, receipent_id, amount, timestamp}
   console.log(`Current Value is: ${currentValue}`)
 
   const transactionResponse = await Storage.AddtoArray(
-    sender_id,receipent_id,amount, timestamp, transaction_id
+    sender_id,receiver_id,String(amount), timestamp, transaction_id
   )
 
   
@@ -26,7 +26,9 @@ async function main({transaction_id, sender_id, receipent_id, amount, timestamp}
   console.log(`Updated Value is: ${updatedValue[0]}`)
   return Storage.address
 }
-export default main;
+
+module.exports = {main};
+// export default main;
 // main().catch((error) => {
 //   console.error(error);
 //   process.exitCode = 1;
