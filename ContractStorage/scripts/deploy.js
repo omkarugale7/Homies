@@ -1,31 +1,31 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
-// will compile your contracts, add the Hardhat Runtime Environment's members to the
-// global scope, and execute the script.
 const hre = require("hardhat");
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
+  const StorageFactory = await ethers.getContractFactory("Storage")
+  console.log("Deploying contract...")
+  const Storage = await StorageFactory.deploy()
+  await Storage.deployed()
+  console.log(Storage);
+  console.log(`Deployed contract to: ${Storage.address}`)
 
-  const lockedAmount = hre.ethers.utils.parseEther("0.001");
+  const currentValue = await Storage.retrieve()
+  console.log(`Current Value is: ${currentValue}`)
 
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  const transactionResponse = await Storage.AddtoArray(
+    "Nilay","Omkar","255","15:20:00 16-03-2022","12df43"
+  )
 
-  await lock.deployed();
+  
+  await transactionResponse.wait(1)
 
-  console.log(
-    `Lock with ${ethers.utils.formatEther(
-      lockedAmount
-    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
-  );
+  const transactionResponse1 = await Storage.AddtoArray(
+    "Omkar","Nilay","255","15:20:00 16-03-2022","12df43"
+  )
+  await transactionResponse1.wait(1)
+  const updatedValue = await Storage.retrieve()
+  console.log(`Updated Value is: ${updatedValue[1]}`)
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
