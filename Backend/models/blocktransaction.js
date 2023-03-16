@@ -1,6 +1,6 @@
 const Mongoose = require('mongoose');
 
-const TransactionSchema = new Mongoose.Schema({
+const BlockTransactionSchema = new Mongoose.Schema({
 
     transaction_id: {
         type: String,
@@ -28,4 +28,4 @@ const TransactionSchema = new Mongoose.Schema({
 
 })
 
-module.exports = Mongoose.model('Transaction', TransactionSchema);
+module.exports = Mongoose.model('BlockTransaction', BlockTransactionSchema);

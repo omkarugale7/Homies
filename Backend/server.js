@@ -5,12 +5,20 @@ require("dotenv").config();
 const port = process.env.PORT || 3000;
 const cors = require('cors');
 
+const userRoutes = require('./routes/users');
+const transactionRoutes = require('./routes/transactions');
+const blocktransactionRoutes = require('./routes/blocktransactions');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 connectDB();
 
 app.use(cors());
+
+app.use('/user', userRoutes);
+app.use('/transaction', transactionRoutes);
+app.use('/block', blocktransactionRoutes);
 
 app.get('/', (req, res) => {
     res.send("Welcome to Dhanrakshak - The Protector of Your Wallet !!!");
