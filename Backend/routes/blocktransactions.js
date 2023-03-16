@@ -3,6 +3,6 @@ const router = express.Router();
 
 const blocktransactions = require('./../controllers/blocktransactions');
 
-router.route('/').get(blocktransactions.getTransactions).post(blocktransactions.createTransaction);
+router.route('/').get(blocktransactions.getTransaction).post(blocktransactions.createTransaction);
 
 module.exports = router;

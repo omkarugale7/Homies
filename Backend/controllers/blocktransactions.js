@@ -1,17 +1,17 @@
 const BlockTransaction = require('../models/blocktransaction');
 const AdminTransaction = require('../models/admintransaction');
 
-module.exports.getTransactions = async (req, res) => {
+module.exports.getTransaction = async (req, res) => {
 
     try {
         
-        const transactions = await BlockTransaction.find({});
+        const transaction = await BlockTransaction.findOne({});
 
-        await BlockTransaction.deleteMany();
+        await BlockTransaction.deleteOne({});
 
         res.status(200).json({
-            transactions: transactions,
-            message: "Transactions Fetched Successfully !!!"
+            transaction: transaction,
+            message: "Transaction Fetched Successfully !!!"
         });
 
     } catch (error) {
